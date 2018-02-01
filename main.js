@@ -117,10 +117,10 @@ function Makecircles(maxTransTime, maxSize) {
             var transTime = this.transitionTime;
         }
 
-        var newCircle = $('<div>').addClass('circle').css({
+        var newCircle = $('<div>').addClass('heart').css({
             'top': event.clientY + 'px',
             'left': event.clientX + 'px',
-            'background-color': 'rgb(' + this.getRandom(255) + ',' + this.getRandom(255) + ',' + this.getRandom(255) + ')',
+            // 'background-color': 'rgb(' + this.getRandom(255) + ',' + this.getRandom(255) + ',' + this.getRandom(255) + ')',
             'transition': transTime + 's',
             'height': size + 'px',
             'width': size + 'px',

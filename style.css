@@ -28,6 +28,16 @@ body {
     background-color: red !important;
     transition: 2s;
 }
+.heart {
+    background-image: url('./images/heart.svg');
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    transition: 4s;
+    fill: green;
+}
 .rocket {
     position: absolute;
     /*border: solid 2px black;*/
