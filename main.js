@@ -64,9 +64,36 @@ var circleLimit = 0;
         } else {
             $('.randomResize').removeClass('selected');
         }
-    })
+    });
 
+    function displayInstructions(instructions) {
+        $('.instructions').fadeOut(1000);
+        let h1 = $('<h1>').addClass('instructions').text(instructions[displayInstructions.count]);
+        setTimeout(function() {
+            $('.instructionsContainer').append(h1);
 
+            if (displayInstructions.count === 1) {
+                setTimeout(function() {
+                    $('.navbar-toggle').click();
+                }, 2000);
+                setTimeout(function() {
+                    $('.navbar-toggle').click();
+                }, 6000);
+            }
+        }, 1000);
+        displayInstructions.count++;
+    };
+    displayInstructions.count = 0;
+
+    let instructInterval = setInterval(function() {
+        const instructions = ['make use of the settings menu to customize your experience.', 'Finally check out my Web Portfolio and Github', ''];
+        if (displayInstructions.count < instructions.length) {
+            displayInstructions(instructions);
+        } else {
+            clearInterval(instructInterval);
+            $('.instructionsContainer').empty();
+        }
+    }, 4000);
 });
 var rocketShipOption = false;
 
@@ -146,73 +173,3 @@ function Makecircles(maxTransTime, maxSize) {
 }
 
 var launch = new Makecircles(7, 80);
-
-/////////////////////////////////////////////////
-const instructions = ['Welcome to my particle generator', 'make use of the settings menu to customize your experience', 'finally check out my web portfolio and github'];
-let count = 0;
-while (count < instructions.length) {
-    $('.instructions').text(instructions[count]);
-    setTimeout(() => {
-        count++;
-    }, 1500);
-}
-
-
-
-// var TxtType = function(el, toRotate, period) {
-//     this.toRotate = toRotate;
-//     this.el = el;
-//     this.loopNum = 0;
-//     this.period = parseInt(period, 10) || 2000;
-//     this.txt = '';
-//     this.tick();
-//     this.isDeleting = false;
-// };
-// var count = 0;
-// TxtType.prototype.tick = function() {
-//     var i = this.loopNum % this.toRotate.length;
-//     var fullTxt = this.toRotate[i];
-//
-//     if (this.isDeleting) {
-//         this.txt = fullTxt.substring(0, this.txt.length - 1);
-//     } else {
-//         this.txt = fullTxt.substring(0, this.txt.length + 1);
-//     }
-//
-//     this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
-//
-//     var that = this;
-//     var delta = 200 - Math.random() * 100;
-//
-//     if (this.isDeleting) { delta /= 2; }
-//
-//     if (!this.isDeleting && this.txt === fullTxt) {
-//         delta = this.period;
-//         this.isDeleting = true;
-//     } else if (this.isDeleting && this.txt === '') {
-//         this.isDeleting = false;
-//         this.loopNum++;
-//         delta = 500;
-//     }
-//
-//     setTimeout(function() {
-//         that.tick();
-//     }, delta);
-// };
-//
-// window.onload = function() {
-//     var elements = document.getElementsByClassName('typewrite');
-//     for (var i=0; i<elements.length; i++) {
-//         var toRotate = elements[i].getAttribute('data-type');
-//         var period = elements[i].getAttribute('data-period');
-//         if (toRotate) {
-//             console.log(count++);
-//             new TxtType(elements[i], JSON.parse(toRotate), period);
-//         }
-//     }
-//     // INJECT CSS
-//     var css = document.createElement("style");
-//     css.type = "text/css";
-//     css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
-//     document.body.appendChild(css);
-// };

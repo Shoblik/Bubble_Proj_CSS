@@ -19,9 +19,14 @@ body {
 }
 .instructions {
     text-align: center;
+    animation: fadein 1s;
 }
 .typewrite {
     color: white;
+}
+.highlight {
+    background-color: red !important;
+    transition: 2s;
 }
 .rocket {
     position: absolute;
@@ -118,6 +123,11 @@ input {
     border: none;
 }
 /*///////////////////////////////////*/
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
 #heart {
 
 }
