@@ -21,6 +21,7 @@ body {
     text-align: center;
     animation: fadein 1s;
     color: white;
+    background-color: rgba(0,0,0, .7);
 }
 .instructionsContainer {
     z-index: 1001;
