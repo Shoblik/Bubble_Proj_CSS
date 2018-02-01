@@ -1,7 +1,6 @@
 $(document).ready(function () {
         $('.contentWrapper').on('mousemove', function () {
                 launch.newCircle();
-                circleLimit = 0;
             if (rocketShipOption) {
                 launch.rocketBoost();
             } else {
@@ -17,7 +16,18 @@ $(document).ready(function () {
     $('.contentWrapper').on('transitionend', '.circle', function () {
         $(this).remove();
     });
-var circleLimit = 0;
+    $('.linkedIn').on('click', function() {
+        var win = window.open('https://www.linkedin.com/in/simon-hoblik-335073148/', '_blank');
+        win.focus();
+    });
+    $('.github').on('click', function() {
+        var win = window.open('https://github.com/Shoblik', '_blank');
+        win.focus();
+    });
+    $('.webPortfolio').on('click', function() {
+        var win = window.open('https://simonhoblik.com', '_blank');
+        win.focus();
+    });
     //*****************Toggle the rocket****************************//
     $('.rocketToggle').on('click', function () {
         if ($('.rocketToggle').hasClass('selected')) {
@@ -66,9 +76,21 @@ var circleLimit = 0;
         }
     });
 
-
     //custom background color in the menu
-    $('.customizeBackground').on
+    $('.customizeBackground').on('click', function() {
+        $(document).keypress(function (e) {
+            if (e.which == 13) {
+                let input = $('.customizeBackground').val();
+                let tempInput = input.split(',');
+                if (tempInput.length > 1) {
+                    //rgb input
+                    $('.contentWrapper').css('background-color', 'rgb('+tempInput[0]+','+tempInput[1]+','+tempInput[2]+')');
+                } else {
+                    $('.contentWrapper').css('background-color', input);
+                }
+            }
+        });
+    });
 
     //instructions that run on page load
     function displayInstructions(instructions) {
