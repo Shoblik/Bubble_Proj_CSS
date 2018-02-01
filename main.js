@@ -65,6 +65,8 @@ var circleLimit = 0;
             $('.randomResize').removeClass('selected');
         }
     });
+
+
     //custom background color in the menu
     $('.customizeBackground').on
 
