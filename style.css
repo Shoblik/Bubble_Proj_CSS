@@ -22,6 +22,10 @@ body {
     animation: fadein 1s;
     color: white;
 }
+.instructionsContainer {
+    z-index: 1001;
+    position: relative;
+}
 .typewrite {
     color: white;
 }

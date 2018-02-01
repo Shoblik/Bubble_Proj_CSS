@@ -173,7 +173,6 @@ function Makecircles(maxTransTime, maxSize) {
                 var topTransition = $(circle).css('top') + 'px';
             }
             if ($('#randomResizeCheckbox').is(':checked')) {
-                console.log(this);
                 var size = this.getRandom(this.maxRandomSizeTransition);
             } else {
                 var size = $('.circle').css('width');
