@@ -20,6 +20,7 @@ body {
 .instructions {
     text-align: center;
     animation: fadein 1s;
+    color: white;
 }
 .typewrite {
     color: white;
@@ -31,6 +32,7 @@ body {
 .rocket {
     position: absolute;
     /*border: solid 2px black;*/
+    background-image: url('./images/white_ship_outline.png');
     height: 0%;
     width: 20%;
     transform: rotateZ(-90deg) translate(70%,-85%);
