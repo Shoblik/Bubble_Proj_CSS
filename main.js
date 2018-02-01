@@ -152,7 +152,7 @@ function Makecircles(maxTransTime, maxSize) {
             setTimeout(function () {
             $(circle).css({
                 'transition-timing-function': 'linear',
-                'left': '105%',
+                'left': '115%',
                 // 'top': Math.floor(Math.random() * window.screen.height) + 'px',
                 'top': topTransition,
                 'height': size + 'px',
@@ -160,7 +160,7 @@ function Makecircles(maxTransTime, maxSize) {
 
                 // 'left':getRandom(window.screen.width) + 'px',
             });
-            if ($(circle).css('left') > 104) {
+            if ($(circle).css('left') > 114) {
                 $(circle).remove();
             }
         }, 0)
