@@ -20,6 +20,7 @@ body {
 .instructions {
     text-align: center;
     animation: fadein 1s;
+    color: white;
 }
 .typewrite {
     color: white;
