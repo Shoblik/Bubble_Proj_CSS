@@ -65,7 +65,10 @@ var circleLimit = 0;
             $('.randomResize').removeClass('selected');
         }
     });
+    //custom background color in the menu
+    $('.customizeBackground').on
 
+    //instructions that run on page load
     function displayInstructions(instructions) {
         $('.instructions').fadeOut(1000);
         let h1 = $('<h1>').addClass('instructions').text(instructions[displayInstructions.count]);
