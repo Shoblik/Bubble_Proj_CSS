@@ -17,6 +17,12 @@ body {
     transform: translate(-50%,-50%);
     transition: 4s;
 }
+.instructions {
+    text-align: center;
+}
+.typewrite {
+    color: white;
+}
 .rocket {
     position: absolute;
     /*border: solid 2px black;*/
