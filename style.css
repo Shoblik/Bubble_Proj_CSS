@@ -129,7 +129,7 @@ input {
     border: none;
 }
 .btnContainer {
-    text-align: center;
+    text-align: left;
 }
 .linkedIn, .githubBtn {
     margin: 0 5px;
