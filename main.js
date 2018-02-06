@@ -1,12 +1,19 @@
 $(document).ready(function () {
         $('.contentWrapper').on('mousemove', function () {
+            for(let i=0; i<launch.multiplier; i++) {
                 launch.newCircle();
+            }
             if (rocketShipOption) {
                 launch.rocketBoost();
             } else {
                 $('.rocket > img').css({'visibility': 'hidden'});
             }
         });
+    $('.contentWrapper').on('click', function(e) {
+            for (let i = 0; i < launch.splatterMultiplier; i++) {
+                launch.newCircle();
+            }
+    });
     $('.navbar').on('mouseover', function () {
         $('.rocket > img').css({'visibility': 'hidden'});
     })
@@ -32,6 +39,46 @@ $(document).ready(function () {
        launch =  new Makecircles(7, 80);
        $('input').val('');
     });
+    $('.multiplierInput').on('input', function() {
+        let multiplierInput = $('.multiplierInput').val();
+        if (multiplierInput > 1) {
+            launch.multiplier = multiplierInput;
+        }
+        if (multiplierInput > 4 && !launch.seenMultiplierMessage) {
+            launch.seenMultiplierMessage = true;
+            let message = $('<h3>').addClass('instructions fadeIn').text('Generating particles at rates higher than 4x may cause performance issues').css('color', 'red');
+            $('.instructionsContainer').append(message);
+            setTimeout(function() {
+                $('.instructions').css({
+                    'opacity': '0',
+                    'transition': '2s'
+                });
+            }, 4000);
+            setTimeout(function() {
+                $('.instructionsContainer').empty();
+            }, 6000);
+        }
+    });
+    $('.splatterInput').on('input', function() {
+       let splatterMultiplier =  $('.splatterInput').val();
+       if (splatterMultiplier > 1) {
+           launch.splatterMultiplier = splatterMultiplier;
+       }
+       if (splatterMultiplier > 150 && !launch.seenSplatterMessage) {
+           launch.seenSplatterMessage = true;
+           let message = $('<h3>').addClass('instructions fadeIn').text('Generating particle splatters at rates higher than 150 particles per click may cause performance issues').css('color', 'red');
+           $('.instructionsContainer').append(message);
+           setTimeout(function() {
+               $('.instructions').css({
+                   'opacity': '0',
+                   'transition': '2s'
+               });
+           }, 5000);
+           setTimeout(function() {
+               $('.instructionsContainer').empty();
+           }, 7000);
+       }
+    });
     //*****************Toggle the rocket****************************//
     $('.rocketToggle').on('click', function () {
         if ($('.rocketToggle').hasClass('selected')) {
@@ -44,7 +91,6 @@ $(document).ready(function () {
             rocketShipOption = true;
         }
     });
-    ///////////////////Ball size/////////////////////////////////////////////////
     $('#ballSizePx').on('input', function () {
         launch.maxSize = $('#ballSizePx').val();
         $('.ballSize').addClass('selected');
@@ -132,6 +178,10 @@ var rocketShipOption = false;
 function Makecircles(maxTransTime, maxSize) {
     this.transitionDelay = 0;
     this.maxSize = maxSize;
+    this.multiplier = 1;
+    this.splatterMultiplier = 50;
+    this.seenMultiplierMessage = false;
+    this.seenSplatterMessage = false;
     this.getRandom = function (max) {
         return Math.floor(Math.random() * max) + 1;
     };
