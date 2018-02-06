@@ -28,6 +28,10 @@ $(document).ready(function () {
         var win = window.open('https://simonhoblik.com', '_blank');
         win.focus();
     });
+    $('.resetBtn').on('click', function() {
+       launch =  new Makecircles(7, 80);
+       $('input').val('');
+    });
     //*****************Toggle the rocket****************************//
     $('.rocketToggle').on('click', function () {
         if ($('.rocketToggle').hasClass('selected')) {
