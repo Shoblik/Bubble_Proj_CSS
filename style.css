@@ -109,6 +109,27 @@ input {
     margin: auto;
     border: 1px solid grey;
 }
+.historyDiv {
+    height: 100vh;
+    width: 210px;
+    background-color: black;
+    transition: .3s;
+    position: absolute;
+    z-index: 10001;
+    text-align: center;
+    margin: auto;
+    border: 1px solid grey;
+    transform: translateX(-100%);
+}
+.showHistoryDiv {
+    transform: translateX(114%);
+}
+.historyTitle {
+    color: white;
+}
+.historyInstructions {
+
+}
 .showColorSelection {
     transform: none;
 }
@@ -132,7 +153,6 @@ input {
 }
 .randomColorBtn {
     margin: 10px auto;
-    display: block;
 }
 .colorDiv {
     width: 100%;

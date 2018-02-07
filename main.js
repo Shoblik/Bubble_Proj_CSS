@@ -143,7 +143,9 @@ $(document).ready(function () {
        $('.colorSelectionDiv').toggleClass('showColorSelection');
     });
     $('.addColor').on('click', launch.addColor);
-
+    $('.saveBtn').on('click', function() {
+        $('.historyDiv').toggleClass('showHistoryDiv');
+    })
     $('.randomColorBtn').on('click', function() {
        if ($('.randomColorBtn').hasClass('btn-danger')) {
            $('.randomColorBtn').removeClass('btn-danger').addClass('btn-success').text('Random Color: Off');
