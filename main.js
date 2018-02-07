@@ -37,6 +37,19 @@ $(document).ready(function () {
     });
     $('.resetBtn').on('click', function() {
        launch =  new Makecircles(7, 80);
+        $('#randomTransitionTime')[0].checked = true;
+        $('.randomTransTime').addClass('selected');
+
+        $('#randomSizeCheckbox')[0].checked = true;
+        $('.randomSize').addClass('selected');
+
+        $('#linearTransitionCheckbox')[0].checked = true;
+        $('.linearTransition').addClass('selected');
+
+        $('#randomResizeCheckbox')[0].checked = false;
+        $('.randomResize').removeClass('selected');
+
+        $('.contentWrapper').css('background-color', 'black');
        $('input').val('');
     });
     $('.multiplierInput').on('input', function() {
