@@ -38,6 +38,9 @@ $(document).ready(function () {
     });
     $('.resetBtn').on('click', function() {
        launch =  new Makecircles(7, 80);
+       if ($('.randomColorBtn').hasClass('btn-success')) {
+           $('.randomColorBtn').removeClass('btn-success').addClass('btn-danger');
+       }
        $('.colorDiv').remove();
         $('#randomTransitionTime')[0].checked = true;
         $('.randomTransTime').addClass('selected');
