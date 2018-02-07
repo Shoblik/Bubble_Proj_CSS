@@ -37,6 +37,7 @@ $(document).ready(function () {
     });
     $('.resetBtn').on('click', function() {
        launch =  new Makecircles(7, 80);
+       $('.colorDiv').remove();
         $('#randomTransitionTime')[0].checked = true;
         $('.randomTransTime').addClass('selected');
 
@@ -143,11 +144,14 @@ $(document).ready(function () {
     });
     $('.addColor').on('click', function() {
         let newColor = $('.newColorInput').val();
-        newColor = newColor.replace(" ", '');
+        if (newColor.split(',').length === 1) {
+            newColor = newColor.replace(" ", '');
+        } else {
+
+        }
         launch.colorArr.push(newColor);
         let colorDiv = $('<div>').addClass('colorDiv').text('').css('background-color', newColor);
         let deleteBtn = $('<span>').addClass('colorDeleteBtn glyphicon glyphicon-remove');
-        colorDiv[0].index = launch.colorArr.length - 1;
         $(colorDiv).append(deleteBtn);
         $('.colorSelectionDiv').append(colorDiv);
     });
