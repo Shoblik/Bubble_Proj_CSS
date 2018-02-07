@@ -142,21 +142,8 @@ $(document).ready(function () {
     $('.customColorBtn').on('click', function() {
        $('.colorSelectionDiv').toggleClass('showColorSelection');
     });
-    $('.addColor').on('click', function() {
-        let newColor = $('.newColorInput').val();
-        let newColorArr = newColor.split(',');
-        if (newColorArr.length === 1) {
-            newColor = newColor.replace(" ", '');
-        } else {
-            newColor = 'rgb('+newColorArr[0]+','+newColorArr[1]+','+newColorArr[2]+')';
-        }
-        launch.colorArr.push(newColor);
-        let colorDiv = $('<div>').addClass('colorDiv').text('').css('background-color', newColor);
-        let deleteBtn = $('<span>').addClass('colorDeleteBtn glyphicon glyphicon-remove');
-        $(colorDiv).append(deleteBtn);
-        $('.colorSelectionDiv').append(colorDiv);
+    $('.addColor').on('click', launch.addColor);
 
-    });
     $('.randomColorBtn').on('click', function() {
        if ($('.randomColorBtn').hasClass('btn-danger')) {
            $('.randomColorBtn').removeClass('btn-danger').addClass('btn-success').text('Random Color: Off');
@@ -165,6 +152,13 @@ $(document).ready(function () {
            $('.randomColorBtn').removeClass('btn-success').addClass('btn-danger').text('Random Color: On');
            launch.randomColor = true;
        }
+    });
+    $('.newColorInput').on('click', function() {
+        $(document).keypress(function (e) {
+            if (e.which === 13) {
+                launch.addColor();
+            }
+        });
     });
     //EVENT DELEGATOR FOR COLORDIV
     $('.colorSelectionDiv').on('click', '.colorDeleteBtn', function(e) {
@@ -307,6 +301,21 @@ function Makecircles(maxTransTime, maxSize) {
                 $(circle).remove();
             }
         }, 0)
+    };
+    this.addColor = function() {
+        let newColor = $('.newColorInput').val();
+        let newColorArr = newColor.split(',');
+        if (newColorArr.length === 1) {
+            newColor = newColor.replace(" ", '');
+        } else {
+            newColor = 'rgb('+newColorArr[0]+','+newColorArr[1]+','+newColorArr[2]+')';
+        }
+        launch.colorArr.push(newColor);
+        let colorDiv = $('<div>').addClass('colorDiv').text('').css('background-color', newColor);
+        let deleteBtn = $('<span>').addClass('colorDeleteBtn glyphicon glyphicon-remove');
+        $(colorDiv).append(deleteBtn);
+        $('.colorSelectionDiv').append(colorDiv);
+        $('.newColorInput').val('');
     };
     this.rocketBoost = function () {
         $('.rocket').css({
