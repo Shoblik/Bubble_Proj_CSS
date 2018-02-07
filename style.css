@@ -97,6 +97,70 @@ input {
     width: 25%;
     margin-left: 10%;
 }
+.colorSelectionDiv {
+    height: 100vh;
+    width: 240px;
+    background-color: black;
+    transform: translateX(-100%);
+    transition: .5s;
+    position: absolute;
+    z-index: 10002;
+    text-align: center;
+    margin: auto;
+    border: 1px solid grey;
+}
+.showColorSelection {
+    transform: none;
+}
+.addColor {
+    /*display: block;*/
+    color: blue;
+    margin: 10px 0 0 5px;
+}
+.addColor:hover {
+    cursor: pointer;
+}
+.newColorInput {
+    margin-top: 10px;
+}
+.colorSelectionTitle {
+    margin-top: 12px;
+    color: white;
+}
+.colorDiv:first-of-type {
+    margin-top: 10px;
+}
+.randomColorBtn {
+    margin: 10px auto;
+    display: block;
+}
+.colorDiv {
+    width: 100%;
+    border: 1px solid white;
+    height: 40px;
+}
+.colorDeleteBtn {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 40%;
+    border-radius: 50%;
+    font-size: 15px;
+    color: white;
+}
+span:hover {
+    cursor: pointer;
+}
+button:focus, input:focus {
+    outline: none !important;
+}
+button:hover {
+    background-color: black !important;
+}
+button {
+    transition: .3s !important;
+}
+
 
 /**********************************************************/
 /**/
@@ -123,7 +187,7 @@ input {
     background-color: rgba(0,0,0, .9);
 }
 .navbar-inverse {
-    width: 20%;
+    width: 265px;
     float: right;
     background-color: transparent;
     border: none;

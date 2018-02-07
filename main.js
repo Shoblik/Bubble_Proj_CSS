@@ -138,7 +138,36 @@ $(document).ready(function () {
             $('.randomResize').removeClass('selected');
         }
     });
-
+    $('.customColorBtn').on('click', function() {
+       $('.colorSelectionDiv').toggleClass('showColorSelection');
+    });
+    $('.addColor').on('click', function() {
+        let newColor = $('.newColorInput').val();
+        newColor = newColor.replace(" ", '');
+        launch.colorArr.push(newColor);
+        let colorDiv = $('<div>').addClass('colorDiv').text('').css('background-color', newColor);
+        let deleteBtn = $('<span>').addClass('colorDeleteBtn glyphicon glyphicon-remove');
+        colorDiv[0].index = launch.colorArr.length - 1;
+        $(colorDiv).append(deleteBtn);
+        $('.colorSelectionDiv').append(colorDiv);
+    });
+    $('.randomColorBtn').on('click', function() {
+       if ($('.randomColorBtn').hasClass('btn-danger')) {
+           $('.randomColorBtn').removeClass('btn-danger').addClass('btn-success').text('Random Color: Off');
+           launch.randomColor = false;
+       } else {
+           $('.randomColorBtn').removeClass('btn-success').addClass('btn-danger').text('Random Color: On');
+           launch.randomColor = true;
+       }
+    });
+    //EVENT DELEGATOR FOR COLORDIV
+    $('.colorSelectionDiv').on('click', '.colorDeleteBtn', function(e) {
+        let colorIndex = $('.colorDeleteBtn').index(this);
+        console.log(colorIndex);
+        launch.colorArr.splice(colorIndex, 1);
+        console.log(launch.colorArr);
+        $(this).parent().remove();
+    })
     //custom background color in the menu
     $('.customizeBackground').on('click', function() {
         $(document).keypress(function (e) {
@@ -195,6 +224,8 @@ function Makecircles(maxTransTime, maxSize) {
     this.splatterMultiplier = 50;
     this.seenMultiplierMessage = false;
     this.seenSplatterMessage = false;
+    this.randomColor = true;
+    this.colorArr = [];
     this.getRandom = function (max) {
         return Math.floor(Math.random() * max) + 1;
     };
@@ -211,10 +242,24 @@ function Makecircles(maxTransTime, maxSize) {
             var transTime = this.transitionTime;
         }
 
+        if (this.randomColor) {
+            var backgroundColor = 'rgb(' + this.getRandom(255) + ',' + this.getRandom(255) + ',' + this.getRandom(255) + ')';
+        } else {
+            if (this.colorArr.length === 1) {
+                var backgroundColor = this.colorArr[0];
+            } else {
+                function randomNum(max) {
+                    return Math.floor(Math.random() * max);
+                }
+                let randomIndex = randomNum(this.colorArr.length);
+                var backgroundColor = this.colorArr[randomIndex];
+            }
+        }
+
         var newCircle = $('<div>').addClass('circle').css({
             'top': event.clientY + 'px',
             'left': event.clientX + 'px',
-            'background-color': 'rgb(' + this.getRandom(255) + ',' + this.getRandom(255) + ',' + this.getRandom(255) + ')',
+            'background-color': backgroundColor,
             'transition': transTime + 's',
             'height': size + 'px',
             'width': size + 'px',

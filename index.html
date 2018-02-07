@@ -10,6 +10,12 @@
     <script src="./main.js"></script>
 </head>
 <body>
+<div class="colorSelectionDiv">
+    <h3 class="colorSelectionTitle">Color Selection</h3>
+    <input class="newColorInput" type="text" placeholder="color name only"><span class="addColor glyphicon glyphicon-plus"></span>
+    <button class="randomColorBtn btn btn-danger">Random Color: On</button>
+
+</div>
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -24,6 +30,7 @@
             <ul class="nav navbar-nav">
                 <li class="active multiplierContainer selected">Particle Multiplier <input class="multiplierInput" type="number" placeholder="1"></li>
                 <li class="active splatterMultiplierContainer selected">Splatter Multiplier <input class="splatterInput" type="number" placeholder="50"></li>
+                <li class="active customColorBtnContainer"><button class="customColorBtn btn btn-warning">Custom Particle Color</button></li>
                 <li class="active ballSize">Max Ball Size <input id="ballSizePx" type="number" placeholder="px"></li>
                 <li class="active transTime">Transition Time <input id="transitionTime" type="number" placeholder="s"></li>
                 <li class="active randomTransTime selected">Random Trans Time<input id="randomTransitionTime" type="checkbox" checked></li>
