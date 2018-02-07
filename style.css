@@ -111,7 +111,7 @@ input {
 }
 .historyDiv {
     height: 100vh;
-    width: 210px;
+    width: 245px;
     background-color: black;
     transition: .3s;
     position: absolute;
@@ -122,19 +122,39 @@ input {
     transform: translateX(-100%);
 }
 .showHistoryDiv {
-    transform: translateX(114%);
+    transform: translateX(98%);
+    overflow-y: auto;
 }
 .historyTitle {
     color: white;
 }
+.saveSelection {
+    padding: 4px;
+}
+.selectionNameDivContainer {
+    width: 100%;
+}
+.selectionTitle {
+    margin: 0;
+    position: relative;
+    padding: 15px;
+    font-size: 125%;
+    pointer-events: none;
+}
+.selectionDiv {
+    border: 1px solid white;
+    border-left: none;
+    border-right: none;
+    color: white;
+    cursor: pointer;
+}
 .historyInstructions {
-
+    margin: 0 5px 10px;
 }
 .showColorSelection {
     transform: none;
 }
 .addColor {
-    /*display: block;*/
     color: blue;
     margin: 10px 0 0 5px;
 }

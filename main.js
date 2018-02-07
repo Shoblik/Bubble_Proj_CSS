@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    launch.renderHistorySelection();
         $('.contentWrapper').on('mousemove', function () {
             for(let i=0; i<launch.multiplier; i++) {
                 launch.newCircle();
@@ -140,7 +141,8 @@ $(document).ready(function () {
         }
     });
     $('.customColorBtn').on('click', function() {
-       $('.colorSelectionDiv').toggleClass('showColorSelection');
+        $('.historyDiv').removeClass('showHistoryDiv');
+        $('.colorSelectionDiv').toggleClass('showColorSelection');
     });
     $('.addColor').on('click', launch.addColor);
     $('.saveBtn').on('click', function() {
@@ -162,7 +164,8 @@ $(document).ready(function () {
             }
         });
     });
-    //EVENT DELEGATOR FOR COLORDIV
+    $('.saveSelection').on('click', launch.storeSelection)
+
     $('.colorSelectionDiv').on('click', '.colorDeleteBtn', function(e) {
         let colorIndex = $('.colorDeleteBtn').index(this);
         console.log(colorIndex);
@@ -304,7 +307,16 @@ function Makecircles(maxTransTime, maxSize) {
             }
         }, 0)
     };
-    this.addColor = function() {
+    this.appendColorDiv = function(newColor) {
+        for (let i=0; i<newColor.length; i++) {
+            let colorDiv = $('<div>').addClass('colorDiv').text('').css('background-color', newColor[i]);
+            let deleteBtn = $('<span>').addClass('colorDeleteBtn glyphicon glyphicon-remove');
+            $(colorDiv).append(deleteBtn);
+            $('.colorSelectionDiv').append(colorDiv);
+            $('.newColorInput').val('');
+        }
+    }
+    this.addColor = ()=> {
         let newColor = $('.newColorInput').val();
         let newColorArr = newColor.split(',');
         if (newColorArr.length === 1) {
@@ -313,12 +325,45 @@ function Makecircles(maxTransTime, maxSize) {
             newColor = 'rgb('+newColorArr[0]+','+newColorArr[1]+','+newColorArr[2]+')';
         }
         launch.colorArr.push(newColor);
-        let colorDiv = $('<div>').addClass('colorDiv').text('').css('background-color', newColor);
-        let deleteBtn = $('<span>').addClass('colorDeleteBtn glyphicon glyphicon-remove');
-        $(colorDiv).append(deleteBtn);
-        $('.colorSelectionDiv').append(colorDiv);
-        $('.newColorInput').val('');
+        this.appendColorDiv([newColor]);
     };
+    this.renderHistorySelection = ()=> {
+        var historyObj = JSON.parse(localStorage.getItem('particleHistory'));
+        for (var index in historyObj) {
+            let selectionDiv = $('<div>').addClass('selectionDiv').on('click', this.selectHistoryItem);
+            let h3 = $('<h3>').addClass('selectionTitle').text(index);
+            $(selectionDiv).append(h3);
+            $('.selectionNameContainer').prepend(selectionDiv);
+        }
+    };
+    this.selectHistoryItem = (e)=> {
+        let storageKey = e.currentTarget.textContent;
+        console.log(storageKey);
+        let historyObj = JSON.parse(localStorage.getItem('particleHistory'));
+        this.colorArr = historyObj[storageKey];
+
+        $('.colorDiv').remove();
+        this.appendColorDiv(this.colorArr);
+    };
+    this.storeSelection = () => {
+        let selectionName = $('.selectionName').val();
+        selectionName = selectionName.replace(' ', '_');
+        console.log('selection name ', selectionName);
+        var historyObj = JSON.parse(localStorage.getItem('particleHistory'));
+        console.log(historyObj);
+        if (historyObj === null) {
+            console.log('nothing in local storage');
+            historyObj = {};
+            // localStorage.setItem('particleHistory', JSON.stringify(historyObj));
+        }
+        historyObj[selectionName + ''] = this.colorArr;
+        localStorage.setItem('particleHistory', JSON.stringify(historyObj));
+        console.log(JSON.parse(localStorage.getItem('particleHistory')));
+        let selectionDiv = $('<div>').addClass('selectionDiv').on('click', this.selectHistoryItem);
+        let h3 = $('<h3>').addClass('selectionTitle').text(selectionName);
+        $(selectionDiv).append(h3);
+        $('.selectionNameContainer').prepend(selectionDiv);
+    }
     this.rocketBoost = function () {
         $('.rocket').css({
             'top': event.screenY + 'px',
