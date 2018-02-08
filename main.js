@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    launch.renderHistorySelection();
+    // launch.renderHistorySelection();
         $('.contentWrapper').on('mousemove', function () {
             for(let i=0; i<launch.multiplier; i++) {
                 launch.newCircle();
@@ -226,6 +226,7 @@ var rocketShipOption = false;
 
 
 function Makecircles(maxTransTime, maxSize) {
+    this.renderHistorySelection();
     this.transitionDelay = 0;
     this.maxSize = maxSize;
     this.multiplier = 1;
