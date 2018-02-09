@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    // launch.renderHistorySelection();
+    launch.renderHistorySelection();
         $('.contentWrapper').on('mousemove', function () {
             for(let i=0; i<launch.multiplier; i++) {
                 launch.newCircle();
@@ -162,7 +162,7 @@ $(document).ready(function () {
     });
     $('.newColorInput').on('click', function() {
         $(document).keypress(function (e) {
-            if (e.which === 13) {
+            if (e.which === 13 && $('.newColorInput').val() !== '') {
                 launch.addColor();
             }
         });
@@ -203,9 +203,9 @@ $(document).ready(function () {
                 setTimeout(function() {
                     $('.navbar-toggle').click();
                 }, 2000);
-                setTimeout(function() {
-                    $('.navbar-toggle').click();
-                }, 6000);
+                // setTimeout(function() {
+                //     $('.navbar-toggle').click();
+                // }, 6000);
             }
         }, 1000);
         displayInstructions.count++;
@@ -226,7 +226,6 @@ var rocketShipOption = false;
 
 
 function Makecircles(maxTransTime, maxSize) {
-    this.renderHistorySelection();
     this.transitionDelay = 0;
     this.maxSize = maxSize;
     this.multiplier = 1;
@@ -332,6 +331,7 @@ function Makecircles(maxTransTime, maxSize) {
         this.appendColorDiv([newColor]);
     };
     this.renderHistorySelection = ()=> {
+        $('.selectionNameContainer').empty();
         var historyObj = JSON.parse(localStorage.getItem('particleHistory'));
         for (var index in historyObj) {
             let selectionDiv = $('<div>').addClass('selectionDiv').on('click', this.selectHistoryItem);
@@ -367,13 +367,15 @@ function Makecircles(maxTransTime, maxSize) {
         let h3 = $('<h3>').addClass('selectionTitle').text(selectionName);
         $(selectionDiv).append(h3);
         $('.selectionNameContainer').prepend(selectionDiv);
-    }
+    };
     this.rocketBoost = function () {
         $('.rocket').css({
             'top': event.screenY + 'px',
             'left': event.screenX + 'px',
         });
-    }
+    };
+    this.renderHistorySelection();
+
 }
 
 var launch = new Makecircles(7, 80);
