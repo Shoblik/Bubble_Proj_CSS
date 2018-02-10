@@ -223,6 +223,12 @@ $(document).ready(function () {
             console.log('left');
             launch.direction = 'right';
         }
+        else if (e.which === 38) {
+            launch.direction = 'top';
+        }
+        else if (e.which === 40) {
+            launch.direction = 'bottom';
+        }
     });
 
     let instructInterval = setInterval(function() {
@@ -332,7 +338,24 @@ function Makecircles(maxTransTime, maxSize) {
                         'width': size + 'px',
                     });
                 }
-
+                else if (this.direction === 'top') {
+                    $(circle).css({
+                        'transition-timing-function': 'linear',
+                        'left': topTransition,
+                        'top': '-15%',
+                        'height': size + 'px',
+                        'width': size + 'px',
+                    });
+                }
+                else if (this.direction === 'bottom') {
+                    $(circle).css({
+                        'transition-timing-function': 'linear',
+                        'left': topTransition,
+                        'top': '115%',
+                        'height': size + 'px',
+                        'width': size + 'px',
+                    });
+                }
                 ///////////////////
             if ($(circle).css('left') > 114) {
                 $(circle).remove();
