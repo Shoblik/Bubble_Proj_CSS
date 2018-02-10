@@ -212,6 +212,19 @@ $(document).ready(function () {
     };
     displayInstructions.count = 0;
 
+    $(document).keydown(function (e) {
+        if (e.which === 39) {
+            //move balls right
+            console.log('right');
+            launch.direction = 'left';
+        }
+        else if (e.which === 37) {
+            //move balls left
+            console.log('left');
+            launch.direction = 'right';
+        }
+    });
+
     let instructInterval = setInterval(function() {
         const instructions = ['make use of the settings menu to customize your experience.', 'Finally check out my Web Portfolio and Github', ''];
         if (displayInstructions.count < instructions.length) {
@@ -234,6 +247,7 @@ function Makecircles(maxTransTime, maxSize) {
     this.seenSplatterMessage = false;
     this.randomColor = true;
     this.colorArr = [];
+    this.direction = 'left';
     this.getRandom = function (max) {
         return Math.floor(Math.random() * max) + 1;
     };
@@ -297,14 +311,29 @@ function Makecircles(maxTransTime, maxSize) {
             } else {
                 var size = $('.circle').css('width');
             }
-            setTimeout(function () {
-            $(circle).css({
-                'transition-timing-function': 'linear',
-                'left': '115%',
-                'top': topTransition,
-                'height': size + 'px',
-                'width': size + 'px',
-            });
+            setTimeout( () => {
+                console.log(this.direction);
+                ////////////////////Strong hand
+                if (this.direction === 'left') {
+                    $(circle).css({
+                        'transition-timing-function': 'linear',
+                        'left': '115%',
+                        'top': topTransition,
+                        'height': size + 'px',
+                        'width': size + 'px',
+                    });
+                }
+                else if (this.direction === 'right') {
+                    $(circle).css({
+                        'transition-timing-function': 'linear',
+                        'left': '-15%',
+                        'top': topTransition,
+                        'height': size + 'px',
+                        'width': size + 'px',
+                    });
+                }
+
+                ///////////////////
             if ($(circle).css('left') > 114) {
                 $(circle).remove();
             }
