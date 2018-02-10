@@ -191,6 +191,9 @@ $(document).ready(function () {
             }
         });
     });
+    $('#transDirection').on('click', function() {
+        $('.transDirection').toggleClass('selected');
+    });
 
     //instructions that run on page load
     function displayInstructions(instructions) {
@@ -232,7 +235,7 @@ $(document).ready(function () {
     });
 
     let instructInterval = setInterval(function() {
-        const instructions = ['make use of the settings menu to customize your experience.', 'Finally check out my Web Portfolio and Github', ''];
+        const instructions = ['make use of the settings menu to customize your experience.', 'use your arrow keys to change the direction of particle movement','Finally check out my Web Portfolio and Github', ''];
         if (displayInstructions.count < instructions.length) {
             displayInstructions(instructions);
         } else {
@@ -254,6 +257,9 @@ function Makecircles(maxTransTime, maxSize) {
     this.randomColor = true;
     this.colorArr = [];
     this.direction = 'left';
+    this.randomDirection = 0;
+    this.randomDirectionArr = ['top', 'right', 'bottom', 'left'];
+    this.randomDirectionIndex = 0;
     this.getRandom = function (max) {
         return Math.floor(Math.random() * max) + 1;
     };
@@ -320,6 +326,15 @@ function Makecircles(maxTransTime, maxSize) {
             setTimeout( () => {
                 console.log(this.direction);
                 ////////////////////Strong hand
+
+                if ($('#transDirection').is(':checked')) {
+                    this.direction = this.randomDirectionArr[this.randomDirectionIndex];
+                    if (this.randomDirectionIndex < 3) {
+                        this.randomDirectionIndex++;
+                    } else {
+                        this.randomDirectionIndex = 0;
+                    }
+                }
                 if (this.direction === 'left') {
                     $(circle).css({
                         'transition-timing-function': 'linear',

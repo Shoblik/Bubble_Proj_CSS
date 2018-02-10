@@ -227,10 +227,13 @@ button {
     background-color: rgba(0,0,0, .9);
 }
 .navbar-inverse {
-    width: 265px;
+    width: 280px;
     float: right;
     background-color: transparent;
     border: none;
+}
+input#transDirection {
+    margin-left: 5px;
 }
 .btnContainer {
     text-align: left;
