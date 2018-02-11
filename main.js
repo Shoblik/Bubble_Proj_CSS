@@ -192,7 +192,21 @@ $(document).ready(function () {
         });
     });
     $('#transDirection').on('click', function() {
-        $('.transDirection').toggleClass('selected');
+        if (!launch.directionInstructions) {
+            $('.transDirection').toggleClass('selected');
+        } else {
+            launch.directionInstructions = false;
+            $('.transDirection').toggleClass('selected');
+            let h1 = $('<h1>').addClass('instructions').text('use arrow keys to change particle direction');
+            $('.instructionsContainer').append(h1);
+
+            setTimeout(function() {
+                $('.instructions').fadeOut(1000);
+                    setTimeout(function() {
+                        $('.instructionsContainer').empty();
+                    }, 6000);
+                }, 5000);
+        }
     });
 
     //instructions that run on page load
@@ -257,7 +271,7 @@ function Makecircles(maxTransTime, maxSize) {
     this.randomColor = true;
     this.colorArr = [];
     this.direction = 'left';
-    this.randomDirection = 0;
+    this.directionInstructions = true;
     this.randomDirectionArr = ['top', 'right', 'bottom', 'left'];
     this.randomDirectionIndex = 0;
     this.getRandom = function (max) {
