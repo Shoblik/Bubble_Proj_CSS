@@ -26,6 +26,8 @@ body {
 .instructionsContainer {
     z-index: 1001;
     position: relative;
+    width: 85%;
+    margin: auto;
 }
 .typewrite {
     color: white;
