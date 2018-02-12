@@ -1,6 +1,6 @@
 $(document).ready(function () {
     launch.renderHistorySelection();
-        $('.contentWrapper').on('mousemove', function () {
+        $('#contentWrapper').on('mousemove', function () {
             for(let i=0; i<launch.multiplier; i++) {
                 launch.newCircle();
             }
@@ -10,7 +10,7 @@ $(document).ready(function () {
                 $('.rocket > img').css({'visibility': 'hidden'});
             }
         });
-    $('.contentWrapper').on('click', function(e) {
+    $('#contentWrapper').on('click', function(e) {
             for (let i = 0; i < launch.splatterMultiplier; i++) {
                 launch.newCircle();
             }
@@ -21,7 +21,7 @@ $(document).ready(function () {
     $('.navbar').on('mouseout', function () {
         $('.rocket > img').css({'visibility': 'visible'});
     });
-    $('.contentWrapper').on('transitionend', '.circle', function () {
+    $('#contentWrapper').on('transitionend', '.circle', function () {
         $(this).remove();
     });
     $('.linkedIn').on('click', function() {
@@ -37,7 +37,7 @@ $(document).ready(function () {
         win.focus();
     });
     $('.resetBtn').on('click', function() {
-       launch =  new Makecircles(7, 80);
+       launch =  new Makecircles(4, 80);
        if ($('.randomColorBtn').hasClass('btn-success')) {
            $('.randomColorBtn').removeClass('btn-success').addClass('btn-danger');
        }
@@ -54,7 +54,7 @@ $(document).ready(function () {
         $('#randomResizeCheckbox')[0].checked = false;
         $('.randomResize').removeClass('selected');
 
-        $('.contentWrapper').css('background-color', 'black');
+        $('#').css('background-color', 'black');
        $('input').val('');
     });
     $('.multiplierInput').on('input', function() {
@@ -184,9 +184,9 @@ $(document).ready(function () {
                 let tempInput = input.split(',');
                 if (tempInput.length > 1) {
                     //rgb input
-                    $('.contentWrapper').css('background-color', 'rgb('+tempInput[0]+','+tempInput[1]+','+tempInput[2]+')');
+                    $('#contentWrapper').css('background-color', 'rgb('+tempInput[0]+','+tempInput[1]+','+tempInput[2]+')');
                 } else {
-                    $('.contentWrapper').css('background-color', input);
+                    $('#contentWrapper').css('background-color', input);
                 }
             }
         });
@@ -324,7 +324,7 @@ function Makecircles(maxTransTime, maxSize) {
     this.maxRandomSizeTransition = 200;
     this.transitionTime = maxTransTime;
     this.renderCircleOnDOM = function (newCircle) {
-        $('.contentWrapper').append(newCircle);
+        $('#contentWrapper').append(newCircle);
     };
     this.setting1 = function (circle) {
             if ($('#linearTransitionCheckbox').is(':checked')) {
@@ -459,4 +459,4 @@ function Makecircles(maxTransTime, maxSize) {
 
 }
 
-var launch = new Makecircles(7, 80);
+var launch = new Makecircles(4, 80);
