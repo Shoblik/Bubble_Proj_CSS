@@ -99,12 +99,13 @@ input {
     width: 25%;
     margin-left: 10%;
 }
+
 .colorSelectionDiv {
     height: 100vh;
     width: 240px;
     background-color: black;
     transform: translateX(-100%);
-    transition: .5s;
+    transition: .2s;
     position: absolute;
     z-index: 10002;
     text-align: center;
@@ -212,8 +213,18 @@ button {
 .navbar-toggle {
     display: block;
 }
+div#myNavbar {
+    transition: .2s !important;
+}
+button.cursor {
+    margin-right: 5px;
+}
+.hideCursor {
+    cursor: none;
+}
 .navbar-collapse.collapse {
     display: none!important;
+    transition: .5s !important;
 }
 .navbar-collapse.collapse.in {
     display: block!important;
@@ -236,6 +247,20 @@ button {
 }
 input#transDirection {
     margin-left: 5px;
+}
+.openAll {
+    color: white;
+    position: absolute;
+    text-decoration: underline;
+    left: 100%;
+    width: 55px;
+    top: 15px;
+    transform: translateX(-130px);
+    display: inline-block;
+    z-index: 2000;
+}
+.openAll:hover {
+    cursor: pointer;
 }
 .btnContainer {
     text-align: left;

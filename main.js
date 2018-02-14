@@ -207,7 +207,13 @@ $(document).ready(function () {
         }
     });
 
-    $('.navbar-toggle').on('click', function() {launch.openMenu = false;});
+    $('.navbar-toggle').on('click', function() {
+        if (!launch.openMenu) {
+            launch.openMenu = true;
+        } else {
+            launch.openMenu = false;
+        }
+    });
     //instructions that run on page load
     function displayInstructions(instructions) {
         $('.instructions').fadeOut(1000);
@@ -215,7 +221,7 @@ $(document).ready(function () {
         setTimeout(function() {
             $('.instructionsContainer').append(h1);
 
-            if (displayInstructions.count === 1 && launch.openMenu) {
+            if (displayInstructions.count === 1 && !launch.openMenu) {
                 setTimeout(function() {
                     $('.navbar-toggle').click();
                 }, 2000);
@@ -254,6 +260,35 @@ $(document).ready(function () {
             $('.instructionsContainer').empty();
         }
     }, 4000);
+    $('.openAll').on('click', function() {
+        console.log($('.navbar-toggle').attr('aria-expanded'));
+        if ($('.openAll').text() === 'open all') {
+            if (!launch.openMenu) {
+                $('.navbar-toggle').click();
+            }
+            launch.openMenu = true;
+            $('.colorSelectionDiv').addClass('showColorSelection');
+            $('.historyDiv').addClass('showHistoryDiv');
+            $('.openAll').addClass('closeAll').text('close all');
+        } else {
+            if (launch.openMenu) {
+                $('.navbar-toggle').click();
+            }
+            launch.openMenu = false;
+            $('.colorSelectionDiv').removeClass('showColorSelection');
+            $('.historyDiv').removeClass('showHistoryDiv');
+            $('.openAll').removeClass('closeAll').text('open all');
+        }
+    });
+    $('.cursor').on('click', function() {
+        $('#contentWrapper').toggleClass('hideCursor');
+        if ($('#contentWrapper').hasClass('hideCursor')) {
+            $('.cursor').text('Show Cursor');
+        } else {
+            $('.cursor').text('Hide Cursor');
+        }
+    })
+
 });
 var rocketShipOption = false;
 
@@ -267,7 +302,7 @@ function Makecircles(maxTransTime, maxSize) {
     this.seenSplatterMessage = false;
     this.randomColor = true;
     this.colorArr = [];
-    this.openMenu = true;
+    this.openMenu = false;
     this.direction = 'left';
     this.directionInstructions = true;
     this.randomDirectionArr = ['top', 'right', 'bottom', 'left'];
