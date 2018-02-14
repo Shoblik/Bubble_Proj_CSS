@@ -267,6 +267,7 @@ input#transDirection {
     top: 15px;
     transform: translateX(-130px);
     display: inline-block;
+    position: fixed;
     z-index: 2000;
 }
 .openAll:hover {
