@@ -1,8 +1,15 @@
 $(document).ready(function () {
     launch.renderHistorySelection();
+
+    const el = document.getElementById('contentWrapper');
+    el.addEventListener('touchmove', function(e) {
+        // console.log(e.touches[0].clientX, e.touches[0].clientY);
+        launch.newCircle(e.touches[0].clientX, e.touches[0].clientY);
+    })
+
         $('#contentWrapper').on('mousemove', function () {
             for(let i=0; i<launch.multiplier; i++) {
-                launch.newCircle();
+                launch.newCircle(event.clientX, event.clientY);
             }
             if (rocketShipOption) {
                 launch.rocketBoost();
@@ -12,7 +19,7 @@ $(document).ready(function () {
         });
     $('#contentWrapper').on('click', function(e) {
             for (let i = 0; i < launch.splatterMultiplier; i++) {
-                launch.newCircle();
+                launch.newCircle(event.clientX, event.clientY);
             }
     });
     $('.navbar').on('mouseover', function () {
@@ -310,7 +317,7 @@ function Makecircles(maxTransTime, maxSize) {
     this.getRandom = function (max) {
         return Math.floor(Math.random() * max) + 1;
     };
-    this.newCircle = function () {
+    this.newCircle = function (x,y) {
         if ($('#randomSizeCheckbox').is(':checked')) {
             var size = this.size();
         } else {
@@ -338,8 +345,10 @@ function Makecircles(maxTransTime, maxSize) {
         }
 
         var newCircle = $('<div>').addClass('circle').css({
-            'top': event.clientY + 'px',
-            'left': event.clientX + 'px',
+            // 'top': event.clientY + 'px',
+            // 'left': event.clientX + 'px',
+            'top': y + 'px',
+            'left': x + 'px',
             'background-color': backgroundColor,
             'transition': transTime + 's',
             'height': size + 'px',
