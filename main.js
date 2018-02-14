@@ -171,11 +171,9 @@ $(document).ready(function () {
 
     $('.colorSelectionDiv').on('click', '.colorDeleteBtn', function(e) {
         let colorIndex = $('.colorDeleteBtn').index(this);
-        console.log(colorIndex);
         launch.colorArr.splice(colorIndex, 1);
-        console.log(launch.colorArr);
         $(this).parent().remove();
-    })
+    });
     //custom background color in the menu
     $('.customizeBackground').on('click', function() {
         $(document).keypress(function (e) {
@@ -209,6 +207,7 @@ $(document).ready(function () {
         }
     });
 
+    $('.navbar-toggle').on('click', function() {launch.openMenu = false;});
     //instructions that run on page load
     function displayInstructions(instructions) {
         $('.instructions').fadeOut(1000);
@@ -216,7 +215,7 @@ $(document).ready(function () {
         setTimeout(function() {
             $('.instructionsContainer').append(h1);
 
-            if (displayInstructions.count === 1) {
+            if (displayInstructions.count === 1 && launch.openMenu) {
                 setTimeout(function() {
                     $('.navbar-toggle').click();
                 }, 2000);
@@ -232,12 +231,10 @@ $(document).ready(function () {
     $(document).keydown(function (e) {
         if (e.which === 39) {
             //move balls right
-            console.log('right');
             launch.direction = 'left';
         }
         else if (e.which === 37) {
             //move balls left
-            console.log('left');
             launch.direction = 'right';
         }
         else if (e.which === 38) {
@@ -270,6 +267,7 @@ function Makecircles(maxTransTime, maxSize) {
     this.seenSplatterMessage = false;
     this.randomColor = true;
     this.colorArr = [];
+    this.openMenu = true;
     this.direction = 'left';
     this.directionInstructions = true;
     this.randomDirectionArr = ['top', 'right', 'bottom', 'left'];
@@ -338,7 +336,6 @@ function Makecircles(maxTransTime, maxSize) {
                 var size = $('.circle').css('width');
             }
             setTimeout( () => {
-                console.log(this.direction);
                 ////////////////////Strong hand
 
                 if ($('#transDirection').is(':checked')) {
@@ -423,7 +420,6 @@ function Makecircles(maxTransTime, maxSize) {
     };
     this.selectHistoryItem = (e)=> {
         let storageKey = e.currentTarget.textContent;
-        console.log(storageKey);
         let historyObj = JSON.parse(localStorage.getItem('particleHistory'));
         this.colorArr = historyObj[storageKey];
 
@@ -433,17 +429,13 @@ function Makecircles(maxTransTime, maxSize) {
     this.storeSelection = () => {
         let selectionName = $('.selectionName').val();
         selectionName = selectionName.replace(' ', '_');
-        console.log('selection name ', selectionName);
         var historyObj = JSON.parse(localStorage.getItem('particleHistory'));
-        console.log(historyObj);
         if (historyObj === null) {
-            console.log('nothing in local storage');
             historyObj = {};
             // localStorage.setItem('particleHistory', JSON.stringify(historyObj));
         }
         historyObj[selectionName + ''] = this.colorArr;
         localStorage.setItem('particleHistory', JSON.stringify(historyObj));
-        console.log(JSON.parse(localStorage.getItem('particleHistory')));
         let selectionDiv = $('<div>').addClass('selectionDiv').on('click', this.selectHistoryItem);
         let h3 = $('<h3>').addClass('selectionTitle').text(selectionName);
         $(selectionDiv).append(h3);
