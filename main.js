@@ -3,8 +3,9 @@ $(document).ready(function () {
 
     const el = document.getElementById('contentWrapper');
     el.addEventListener('touchmove', function(e) {
-        // console.log(e.touches[0].clientX, e.touches[0].clientY);
-        launch.newCircle(e.touches[0].clientX, e.touches[0].clientY);
+        for (let i=0; i<launch.multiplier; i++) {
+            launch.newCircle(e.touches[0].clientX, e.touches[0].clientY);
+        }
     })
 
         $('#contentWrapper').on('mousemove', function () {
