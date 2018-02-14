@@ -57,7 +57,7 @@ body {
     position: absolute;
     overflow: hidden;
 }
-body, #contentWrapper {
+#contentWrapper {
     overflow:hidden;
     position:fixed;
     top:0;
