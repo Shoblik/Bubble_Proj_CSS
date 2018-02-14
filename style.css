@@ -57,9 +57,7 @@ body {
     position: absolute;
     overflow: hidden;
 }
-body {
-    overflow: hidden;
-}
+
 #contentWrapper {
     overflow:hidden;
     position:fixed;
@@ -253,6 +251,9 @@ button.cursor {
     float: right;
     background-color: transparent;
     border: none;
+    position: fixed;
+    left: 100%;
+    transform: translate(-100%);
 }
 input#transDirection {
     margin-left: 5px;
