@@ -385,7 +385,7 @@ function Makecircles(maxTransTime, maxSize) {
 
                 if ($('#transDirection').is(':checked')) {
                     this.direction = this.randomDirectionArr[this.randomDirectionIndex];
-                    if (this.randomDirectionIndex < 3) {
+                    if (this.randomDirectionIndex < this.randomDirectionArr.length - 1) {
                         this.randomDirectionIndex++;
                     } else {
                         this.randomDirectionIndex = 0;
