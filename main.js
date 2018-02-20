@@ -1,4 +1,12 @@
 $(document).ready(function () {
+    let lastColorSelection = localStorage.getItem('lastColorSelection');
+    if (lastColorSelection !== null) {
+      launch.colorArr = lastColorSelection.split(',');
+      $('.randomColorBtn').removeClass('btn-danger').addClass('btn-success').text('Random Color: Off');
+      launch.randomColor = false;
+      launch.appendColorDiv(launch.colorArr);
+      console.log('color selection ', lastColorSelection);
+    }
     launch.renderHistorySelection();
         $('#contentWrapper').on('mousemove', function () {
             for(let i=0; i<launch.multiplier; i++) {
@@ -456,6 +464,7 @@ function Makecircles(maxTransTime, maxSize) {
     this.selectHistoryItem = (e)=> {
         let storageKey = e.currentTarget.textContent;
         let historyObj = JSON.parse(localStorage.getItem('particleHistory'));
+        let lastColorSelection = JSON.stringify(localStorage.setItem('lastColorSelection', historyObj[storageKey]));
         this.colorArr = historyObj[storageKey];
 
         $('.colorDiv').remove();
